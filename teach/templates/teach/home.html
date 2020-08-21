@@ -1,0 +1,35 @@
+
+{% extends 'teach/main.html' %}
+{% block content %}
+
+<br>
+<div class="text-center">
+  <h1>Lessons</h1>
+</div>
+<br>
+{% for lesson in lessons %}
+
+    <div class="center-block col-md-6">
+        <div class='card card-body border-info h-100'  >
+              <h3>{{ lesson.name}}</h3>
+              <hr>    
+              <h6>{{ lesson.context}}</h6>
+              <hr>
+              <video width="800" height="300" controls>
+                <source src="{{lesson.video.url}}" type="video/mp4">
+              </video>
+              <br>
+              <p>Lesson date: {{lesson.date}}</p>
+              {% if request.user.is_staff %}
+              <a class='btn btn-sm btn-info' href="{% url 'update_lesson' lesson.id %}" >Update</a>
+              <a class='btn btn-sm btn-danger' href="{% url 'delete_lesson' lesson.id %}" >Delete</a>
+              {% endif %}
+        </div>
+    </div>
+
+<br>
+
+{% endfor %}
+{% endblock %}
+
+
